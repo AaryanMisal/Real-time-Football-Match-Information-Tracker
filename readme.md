@@ -32,7 +32,7 @@ pip install -r requirements.txt
 Make sure to add Input videos in the directory 'input_videos'. Then add this video to config.yaml so that the project can run on this video to generate the required annotated video and stats csv files.
 
 ## Models
-In models directory, we have put our designated Yolov5 model. Make sure to attach your required model here.
+In models directory, we have put our designated Yolov5 model. Make sure to attach your required model here. We could not attach the model here due to size constraints.
 
 ## Running the Pipeline
 
