@@ -1,0 +1,108 @@
+run:
+  input_video: "input_videos/background-9.mp4"
+  start_frame: 0
+  end_frame: 1000              
+  output_dir: "outputs"
+  run_id: "latest"            
+  device: "cuda:0"              
+  save_annotated_video: true
+  save_debug_overlays: false
+
+model:
+  weights: "models/best.pt"
+  conf: 0.18                 
+  iou: 0.50
+  imgsz: 960
+
+classes:
+  ball: 0
+  goalkeeper: 1
+  player: 2
+  referee: 3
+
+tracking:
+  enable: true
+  bytetrack:
+    track_thresh: 0.18
+    track_buffer: 180
+    match_thresh: 0.50
+    frame_rate: null
+    min_hits: 10
+
+camera_motion:
+  enable: true
+  lk_win_size: 21
+  lk_max_level: 3
+  max_features: 400
+  min_feature_quality: 0.01
+  min_feature_distance: 12
+  ransac: false
+  smooth_alpha: 0.6
+
+mapping:
+  enable: true
+  pitch_length_m: 105.0
+  pitch_width_m: 68.0
+  homography_matrix_path: null
+  image_points_px:
+    - [120, 80]
+    - [1160, 80]
+    - [1220, 650]
+    - [60, 650]
+  pitch_points_m:
+    - [0.0, 0.0]
+    - [105.0, 0.0]
+    - [105.0, 68.0]
+    - [0.0, 68.0]
+
+ball:
+  max_gap_frames_to_interpolate: 12
+  smoothing_window: 7         
+  outlier_max_speed_kmh: 120   
+  world_use: true              
+
+possession:
+  use_world_distance: true
+  max_ball_to_player_m: 2.2
+  hysteresis_m: 0.75
+  hold_frames: 6
+
+teams:
+  enable: true
+  sample_frames: 20
+  jersey_roi:
+    y1: 0.20
+    y2: 0.60
+    x1: 0.20
+    x2: 0.80
+  kmeans_k: 2
+  min_players_for_clustering: 6
+  color_space: "HSV"
+  smooth_alpha: 0.85
+
+analytics:
+  enable: true
+  speed:
+    smoothing_window: 5
+    min_dt_s: 0.04
+  zones:
+    sprint_kmh: 25.0
+    high_intensity_kmh: 18.0
+    jog_kmh: 10.0
+  thirds:
+    enable: true
+  heatmap:
+    enable: true
+    grid_x: 12
+    grid_y: 8
+
+render:
+  enable: true
+  show_ids: true
+  show_speed: true
+  show_distance: true
+  show_team: true
+  show_possession_bar: true
+  show_ball_speed: true
+  thickness: 2
+  font_scale: 0.6
